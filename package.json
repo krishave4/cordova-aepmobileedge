@@ -1,0 +1,27 @@
+{
+    "name": "@adobe/cordova-aepmobileedge",
+    "version": "0.0.1",
+    "description": "Adobe Experience Platform - Analytics plugin for Cordova apps.",
+    "cordova": {
+      "id": "cordova-aepmobileedge",
+      "platforms": [
+        "android",
+        "ios"
+      ]
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/krishave4/cordova-aepmobileedge.git"
+    },
+    "keywords": [
+      "ecosystem:cordova",
+      "adobe",
+      "mobile edge",
+      "mobile sdk",
+      "marketing",
+      "cordova-android",
+      "cordova-ios"
+    ],
+    "author": "Neela Reddy",
+    "license": "Apache 2.0"
+  }
