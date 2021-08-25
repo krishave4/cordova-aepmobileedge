@@ -8,14 +8,13 @@ cordova.define("cordova-aepmobileedge.cordova-aepmobileedge", function(require, 
         // ===========================================================================
         // public objects
         // ===========================================================================
-        AEPMobileEdge.createEvent = function(name, type, source, data) {
-            return {
-                name: name,
-                type: type,
-                source: source,
-                data: data
-            };
+
+        AEPMobileEdge.sendEvent = function(sdkEvent, success, fail) {
+            var FUNCTION_NAME = "sendEvent";
+    
+            return exec(success, fail, PLUGIN_NAME, FUNCTION_NAME, [sdkEvent]);
         };
+
         return AEPMobileEdge;
 
     }());    
