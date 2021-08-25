@@ -32,6 +32,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Iterator;
 import com.adobe.marketing.mobile.Edge;
+import com.adobe.marketing.mobile.ExperienceEvent;
+
 
 
 /**
@@ -60,12 +62,8 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
                   final HashMap<String, Object> eventMap = getObjectMapFromJSON(args.getJSONObject(0));
                   final Event event = getEventFromMap(eventMap);
 
-                  MobileCore.dispatchEvent(event, new ExtensionErrorCallback<ExtensionError>() {
-                      @Override
-                      public void error(ExtensionError extensionError) {
-                          callbackContext.error(extensionError.getErrorName());
-                      }
-                  });
+                  ExperienceEvent experienceEvent = new ExperienceEvent.Builder().setXdmSchema(event).build();
+                  Edge.sendEvent(experienceEvent, null);
 
                   callbackContext.success();
               } catch (Exception ex) {
