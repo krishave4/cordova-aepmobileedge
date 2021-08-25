@@ -14,12 +14,23 @@ package com.adobe.marketing.mobile.cordova;
 import android.os.Handler;
 import android.os.Looper;
 
-import org.apache.cordova.CordovaPlugin;
+import com.adobe.marketing.mobile.AdobeCallback;
+import com.adobe.marketing.mobile.Event;
+import com.adobe.marketing.mobile.Event.Builder;
+import com.adobe.marketing.mobile.ExtensionError;
+import com.adobe.marketing.mobile.ExtensionErrorCallback;
+import com.adobe.marketing.mobile.LoggingMode;
+import com.adobe.marketing.mobile.MobileCore;
+import com.adobe.marketing.mobile.MobilePrivacyStatus;
 import org.apache.cordova.CallbackContext;
-
+import org.apache.cordova.CordovaInterface;
+import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.CordovaWebView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import java.util.HashMap;
+import java.util.Iterator;
 
 
 /**
