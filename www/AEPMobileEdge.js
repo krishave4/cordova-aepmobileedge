@@ -1,6 +1,6 @@
 cordova.define("cordova-aepmobileedge.cordova-aepmobileedge", function(require, exports, module) {
-    var ACPMobileEdge = (function() {
-        var ACPMobileEdge = (typeof exports !== 'undefined') && exports || {};
+    var AEPMobileEdge = (function() {
+        var AEPMobileEdge = (typeof exports !== 'undefined') && exports || {};
         var exec = cordova.require('cordova/exec'); // eslint-disable-line no-undef
     
         var PLUGIN_NAME = "AEPMobileEdge_Cordova";
@@ -8,7 +8,7 @@ cordova.define("cordova-aepmobileedge.cordova-aepmobileedge", function(require, 
         // ===========================================================================
         // public objects
         // ===========================================================================
-        ACPMobileEdge.createEvent = function(name, type, source, data) {
+        AEPMobileEdge.createEvent = function(name, type, source, data) {
             return {
                 name: name,
                 type: type,
@@ -16,9 +16,9 @@ cordova.define("cordova-aepmobileedge.cordova-aepmobileedge", function(require, 
                 data: data
             };
         };
-        return ACPMobileEdge;
+        return AEPMobileEdge;
 
     }());    
-    module.exports = ACPMobileEdge;
+    module.exports = AEPMobileEdge;
 
 });
