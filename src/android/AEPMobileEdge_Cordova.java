@@ -27,7 +27,42 @@ import org.json.JSONObject;
  */
 public class AEPMobileEdge_Cordova extends CordovaPlugin {
 
+  final static String METHOD_EDGE_SEND_EVENT = "sendEvent";
+
     @Override
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {}
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
+      if (METHOD_EDGE_SEND_EVENT.equals(action)) {
+        this.sendEvent(args, callbackContext);
+        return true;
+      }
+
+      return false;
+
+    }
+
+    private void sendEvent(final JSONArray args, final CallbackContext callbackContext) {
+      cordova.getThreadPool().execute(new Runnable() {
+          @Override
+          public void run() {
+              try {
+                  final HashMap<String, Object> eventMap = getObjectMapFromJSON(args.getJSONObject(0));
+                  final Event event = getEventFromMap(eventMap);
+
+                  MobileCore.dispatchEvent(event, new ExtensionErrorCallback<ExtensionError>() {
+                      @Override
+                      public void error(ExtensionError extensionError) {
+                          callbackContext.error(extensionError.getErrorName());
+                      }
+                  });
+
+                  callbackContext.success();
+              } catch (Exception ex) {
+                  final String errorMessage = String.format("Exception in call to dispatchEvent: %s", ex.getLocalizedMessage());
+                  MobileCore.log(LoggingMode.WARNING, "AEP SDK", errorMessage);
+                  callbackContext.error(errorMessage);
+              }
+          }
+      });
+  }
 
 }
