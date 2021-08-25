@@ -19,4 +19,5 @@ var AEPMobileEdge = (function() {
 
 }());
 
-export default AEPMobileEdge;
+module.exports =  AEPMobileEdge;
+
