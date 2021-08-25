@@ -31,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import com.adobe.marketing.mobile.Edge;
 import com.adobe.marketing.mobile.ExperienceEvent;
 
@@ -62,7 +63,17 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
                   final HashMap<String, Object> eventMap = getObjectMapFromJSON(args.getJSONObject(0));
                   final Event event = getEventFromMap(eventMap);
 
-                  ExperienceEvent experienceEvent = new ExperienceEvent.Builder().setXdmSchema(event).build();
+                  Map<String, Object> reviewXdmData = new HashMap<>();
+                  reviewXdmData.put("productSku", "demo123");
+                  reviewXdmData.put("rating", 5);
+                  reviewXdmData.put("reviewText", "I love this demo!");
+                  reviewXdmData.put("reviewerId", "Anonymous user");
+
+                  Map<String, Object> xdmData = new HashMap<>();
+                  xdmData.put("eventType", "MyFirstXDMExperienceEvent");
+                  xdmData.put("", reviewXdmData);
+
+                  ExperienceEvent experienceEvent = new ExperienceEvent.Builder().setXdmSchema(xdmData).build();
                   Edge.sendEvent(experienceEvent, null);
 
                   callbackContext.success();
