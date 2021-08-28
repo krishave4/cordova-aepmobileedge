@@ -56,6 +56,7 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
     }
 
     private void sendEvent(final JSONArray args, final CallbackContext callbackContext) {
+        MobileCore.log(LoggingMode.WARNING, "AEP SDK", "Got a call to send Message");
       cordova.getThreadPool().execute(new Runnable() {
           @Override
           public void run() {
@@ -74,8 +75,14 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
                   xdmData.put("", reviewXdmData);
 
                   ExperienceEvent experienceEvent = new ExperienceEvent.Builder().setXdmSchema(xdmData).build();
-                  Edge.sendEvent(experienceEvent, null);
-
+                  MobileCore.log(LoggingMode.WARNING, "AEP SDK", "Sending the Message");
+                  Edge.sendEvent(experienceEvent, new EdgeCallback() {
+                    @Override
+                    public void onComplete(final List<EdgeEventHandle> handles) {
+                          // handle the Edge Network response 
+                          MobileCore.log(LoggingMode.WARNING, "AEP SDK", "Received Network Response");
+                    }
+                  });
                   callbackContext.success();
               } catch (Exception ex) {
                   final String errorMessage = String.format("Exception in call to dispatchEvent: %s", ex.getLocalizedMessage());
