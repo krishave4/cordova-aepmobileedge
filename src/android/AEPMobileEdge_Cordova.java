@@ -76,7 +76,7 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
 
                   Map<String, Object> xdmData = new HashMap<>();
                   xdmData.put("eventType", "MyFirstXDMExperienceEvent");
-                  xdmData.put("", reviewXdmData);
+                  xdmData.put("_aepgdcdevenablement2", reviewXdmData);
 
                   ExperienceEvent experienceEvent = new ExperienceEvent.Builder().setXdmSchema(xdmData).build();
                   MobileCore.log(LoggingMode.WARNING, "AEP SDK", "Sending the Message");
