@@ -109,6 +109,7 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
                 // "}" +
                 // "}" +
                 // "}";
+                MobileCore.log(LoggingMode.WARNING, "AEP SDK", event.getEventData());
                 Map<String, Object> xdmData = new Gson().fromJson(
                     new JSONObject(event.getEventData()).toString(), new TypeToken<HashMap<String, Object>>() {}.getType()
                 );
@@ -177,7 +178,7 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
       while (it.hasNext()) {
           String n = (String) it.next();
           try {
-              map.put(n, data.getObject(n));
+              map.put(n, data.getString(n));
           } catch (JSONException e) {
               e.printStackTrace();
           }
