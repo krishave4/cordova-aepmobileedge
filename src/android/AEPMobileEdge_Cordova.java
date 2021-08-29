@@ -96,7 +96,7 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
                 "'web':{" +
                 "'webPageDetails':{" +
                 "'pageViews':{" +
-                "'id':'" + "/uri456789" +
+                "'id':'" + "/uri456789" + "', 'value': 1" +
                 "}" +
                 "}" +
                 "}" +
