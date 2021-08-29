@@ -72,7 +72,7 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
                 final HashMap<String, Object> eventMap = getObjectMapFromJSON(args.getJSONObject(0));
                 final Event event = getEventFromMap(eventMap);
                 MobileCore.log(LoggingMode.WARNING, "AEP SDK", "Actual Message");
-                MobileCore.log(LoggingMode.WARNING, "AEP SDK", getMapFromEvent(event));
+                MobileCore.log(LoggingMode.WARNING, "AEP SDK", serialize(getMapFromEvent(event)));
 
                 //   Map<String, Object> reviewXdmData = new HashMap<>();
                 //   reviewXdmData.put("productSku", "demo123");
@@ -176,6 +176,14 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
       eventMap.put("data", event.getEventData());
 
       return eventMap;
+  }
+
+  private String serialize(Serializable o) throws IOException {
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    ObjectOutputStream oos = new ObjectOutputStream(baos);
+    oos.writeObject(o);
+    oos.close();
+    return Base64.getEncoder().encodeToString(baos.toByteArray());
   }
 
   // ===============================================================
