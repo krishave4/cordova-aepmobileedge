@@ -110,7 +110,7 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
                 // "}" +
                 // "}";
                 Map<String, Object> xdmData = new Gson().fromJson(
-                    new JSONObject(event.getEventData()), new TypeToken<HashMap<String, Object>>() {}.getType()
+                    new JSONObject(event.getEventData()).toString(), new TypeToken<HashMap<String, Object>>() {}.getType()
                 );
 
                 // ExperienceEvent experienceEvent = new ExperienceEvent.Builder()
@@ -191,7 +191,7 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
               event.get("name").toString(),
               event.get("type").toString(),
               event.get("source").toString()
-      ).setEventData(getObjectMapFromJSON(new JSONObject(event.get("data").toString()))).build();
+      ).setEventData(getObjectMapFromJSON(new JSONObject(event.get("data")))).build();
   }
 
   private HashMap<String, Object> getMapFromEvent(final Event event) {
