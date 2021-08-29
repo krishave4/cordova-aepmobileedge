@@ -177,7 +177,7 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
       while (it.hasNext()) {
           String n = (String) it.next();
           try {
-              map.put(n, data.getString(n));
+              map.put(n, data.getObject(n));
           } catch (JSONException e) {
               e.printStackTrace();
           }
@@ -191,7 +191,7 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
               event.get("name").toString(),
               event.get("type").toString(),
               event.get("source").toString()
-      ).setEventData(getObjectMapFromJSON(new JSONObject(event.get("data")))).build();
+      ).setEventData(getObjectMapFromJSON(new JSONObject(event.get("data").toString()))).build();
   }
 
   private HashMap<String, Object> getMapFromEvent(final Event event) {
