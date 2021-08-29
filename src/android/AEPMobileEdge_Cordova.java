@@ -65,8 +65,8 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
           @Override
           public void run() {
               try {
-                  final HashMap<String, Object> eventMap = getObjectMapFromJSON(args.getJSONObject(0));
-                  final Event event = getEventFromMap(eventMap);
+                //   final HashMap<String, Object> eventMap = getObjectMapFromJSON(args.getJSONObject(0));
+                //   final Event event = getEventFromMap(eventMap);
 
                 //   Map<String, Object> reviewXdmData = new HashMap<>();
                 //   reviewXdmData.put("productSku", "demo123");
@@ -87,30 +87,31 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
             //         }
             //       });
             //       callbackContext.success();
-            //   } catch (Exception ex) {
-            //       final String errorMessage = String.format("Exception in call to dispatchEvent: %s", ex.getLocalizedMessage());
-            //       MobileCore.log(LoggingMode.WARNING, "AEP SDK", errorMessage);
-            //       callbackContext.error(errorMessage);
-            //   }                       // handle the Edge Network response 
+                String jsonString = "{" +
+                "'eventType':'Mobile SDK Page View'," +
+                "'web':{" +
+                "'webPageDetails':{" +
+                "'pageViews':{" +
+                "'id':'" + "/uri456789" +
+                "}" +
+                "}" +
+                "}" +
+                "}";
+                Map<String, Object> xdmData = new Gson().fromJson(
+                        jsonString, new TypeToken<HashMap<String, Object>>() {}.getType()
+                );
 
-            String jsonString = "{" +
-            "'eventType':'Mobile SDK Page View'," +
-            "'web':{" +
-            "'webPageDetails':{" +
-            "'pageViews':{" +
-            "'id':'" + "/uri456789" +
-            "}" +
-            "}" +
-            "}" +
-            "}";
-    Map<String, Object> xdmData = new Gson().fromJson(
-            jsonString, new TypeToken<HashMap<String, Object>>() {}.getType()
-    );
+                ExperienceEvent experienceEvent = new ExperienceEvent.Builder()
+                        .setXdmSchema(xdmData)
+                        .build();
+                Edge.sendEvent(experienceEvent, null);
+              } catch (Exception ex) {
+                  final String errorMessage = String.format("Exception in call to dispatchEvent: %s", ex.getLocalizedMessage());
+                  MobileCore.log(LoggingMode.WARNING, "AEP SDK", errorMessage);
+                  callbackContext.error(errorMessage);
+              }                       // handle the Edge Network response 
 
-    ExperienceEvent experienceEvent = new ExperienceEvent.Builder()
-            .setXdmSchema(xdmData)
-            .build();
-    Edge.sendEvent(experienceEvent, null);
+
     
           }
       });
