@@ -91,6 +91,7 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
             //         }
             //       });
             //       callbackContext.success();
+            MobileCore.log(LoggingMode.WARNING, "AEP SDK", "Sending the Message");
                 String jsonString = "{" +
                 "'eventType':'Mobile SDK Page View'," +
                 "'web':{" +
@@ -109,6 +110,7 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
                         .setXdmSchema(xdmData)
                         .build();
                 Edge.sendEvent(experienceEvent, null);
+                MobileCore.log(LoggingMode.WARNING, "AEP SDK", "Sent the Message");
               } catch (Exception ex) {
                   final String errorMessage = String.format("Exception in call to dispatchEvent: %s", ex.getLocalizedMessage());
                   MobileCore.log(LoggingMode.WARNING, "AEP SDK", errorMessage);
