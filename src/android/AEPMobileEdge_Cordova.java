@@ -74,7 +74,9 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
           @Override
           public void run() {
               try {
-                final HashMap<String, Object> eventMap = getObjectMapFromJSON(args.getJSONObject(0).getJSONObject("data"));
+                final HashMap<String, Object> eventMap = new Gson().fromJson(args.getJSONObject(0).getJSONObject("data").toString(), HashMap.class);
+
+                // final HashMap<String, Object> eventMap = getObjectMapFromJSON(args.getJSONObject(0).getJSONObject("data"));
                 // final Event event = getEventFromMap(eventMap);
                 // MobileCore.log(LoggingMode.WARNING, "AEP SDK", "Actual Message");
                 // MobileCore.log(LoggingMode.WARNING, "AEP SDK", new JSONObject(event).toString() );
