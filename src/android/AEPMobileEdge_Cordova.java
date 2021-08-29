@@ -107,65 +107,6 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
     }
 
     // ===============================================================
-    // Helpers
-    // ===============================================================
-    private HashMap<String, String> getStringMapFromJSON(JSONObject data) {
-        HashMap<String, String> map = new HashMap<String, String>();
-        @SuppressWarnings("rawtypes")
-        Iterator it = data.keys();
-        while (it.hasNext()) {
-            String n = (String) it.next();
-            try {
-                map.put(n, data.getString(n));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return map;
-    }
-
-    private HashMap<String, Object> getObjectMapFromJSON(JSONObject data) {
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        @SuppressWarnings("rawtypes")
-        Iterator it = data.keys();
-        while (it.hasNext()) {
-            String n = (String) it.next();
-            try {
-                map.put(n, data.getString(n));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        return map;
-    }
-
-    private Event getEventFromMap(final HashMap<String, Object> event) throws Exception {
-        return new Event.Builder(event.get("name").toString(), event.get("type").toString(),
-                event.get("source").toString())
-                        .setEventData(getObjectMapFromJSON(new JSONObject(event.get("data").toString()))).build();
-    }
-
-    private HashMap<String, Object> getMapFromEvent(final Event event) {
-        final HashMap<String, Object> eventMap = new HashMap<>();
-        eventMap.put("name", event.getName());
-        eventMap.put("type", event.getType());
-        eventMap.put("source", event.getSource());
-        eventMap.put("data", event.getEventData());
-
-        return eventMap;
-    }
-
-    private String serialize(Serializable o) throws IOException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream(baos);
-        oos.writeObject(o);
-        oos.close();
-        return Base64.getEncoder().encodeToString(baos.toByteArray());
-    }
-
-    // ===============================================================
     // Plugin lifecycle events
     // ===============================================================
     @Override
