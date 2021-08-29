@@ -109,7 +109,7 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
                 // "}" +
                 // "}" +
                 // "}";
-                MobileCore.log(LoggingMode.WARNING, "AEP SDK", event.getEventData());
+                // MobileCore.log(LoggingMode.WARNING, "AEP SDK", event.getEventData());
                 Map<String, Object> xdmData = new Gson().fromJson(
                     new JSONObject(event.getEventData()).toString(), new TypeToken<HashMap<String, Object>>() {}.getType()
                 );
@@ -118,7 +118,7 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
                 //         .setXdmSchema(xdmData)
                 //         .build();
                 // Edge.sendEvent(experienceEvent, null);
-                ExperienceEvent experienceEvent = new ExperienceEvent.Builder().setXdmSchema(xdmData).build();
+                ExperienceEvent experienceEvent = new ExperienceEvent.Builder().setXdmSchema(event.getEventData()).build();
                 MobileCore.log(LoggingMode.WARNING, "AEP SDK", "Sending the Message");
                 Edge.sendEvent(experienceEvent, new EdgeCallback() {
                 @Override
