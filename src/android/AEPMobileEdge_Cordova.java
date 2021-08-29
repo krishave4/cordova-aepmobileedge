@@ -40,6 +40,10 @@ import com.adobe.marketing.mobile.EdgeEventHandle;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;  
+import java.io.Serializable;
+import java.io.IOException;
+import java.io.*;
+
 
 
 
