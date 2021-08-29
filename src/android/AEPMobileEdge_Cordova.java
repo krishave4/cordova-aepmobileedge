@@ -37,6 +37,8 @@ import com.adobe.marketing.mobile.Edge;
 import com.adobe.marketing.mobile.ExperienceEvent;
 import com.adobe.marketing.mobile.EdgeCallback;
 import com.adobe.marketing.mobile.EdgeEventHandle;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 
 
