@@ -74,10 +74,10 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
           @Override
           public void run() {
               try {
-                final HashMap<String, Object> eventMap = getObjectMapFromJSON(args.getJSONObject(0));
+                final HashMap<String, Object> eventMap = getObjectMapFromJSON(args.getJSONObject(0).getJSONObject("data"));
                 final Event event = getEventFromMap(eventMap);
                 MobileCore.log(LoggingMode.WARNING, "AEP SDK", "Actual Message");
-                MobileCore.log(LoggingMode.WARNING, "AEP SDK", new JSONObject(event.getEventData()).toString() );
+                MobileCore.log(LoggingMode.WARNING, "AEP SDK", new JSONObject(event).toString() );
 
                 //   Map<String, Object> reviewXdmData = new HashMap<>();
                 //   reviewXdmData.put("productSku", "demo123");
@@ -118,7 +118,7 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
                 //         .setXdmSchema(xdmData)
                 //         .build();
                 // Edge.sendEvent(experienceEvent, null);
-                ExperienceEvent experienceEvent = new ExperienceEvent.Builder().setXdmSchema(event.getEventData()).build();
+                ExperienceEvent experienceEvent = new ExperienceEvent.Builder().setXdmSchema(event).build();
                 MobileCore.log(LoggingMode.WARNING, "AEP SDK", "Sending the Message");
                 Edge.sendEvent(experienceEvent, new EdgeCallback() {
                 @Override
@@ -192,7 +192,7 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
               event.get("name").toString(),
               event.get("type").toString(),
               event.get("source").toString()
-      ).setEventData(getObjectMapFromJSON(new JSONObject(event.get("data")))).build();
+      ).setEventData(getObjectMapFromJSON(new JSONObject(event.get("data").toString()))).build();
   }
 
   private HashMap<String, Object> getMapFromEvent(final Event event) {
