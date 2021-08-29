@@ -123,6 +123,18 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
                 @Override
                 public void onComplete(final List<EdgeEventHandle> handles) {
                         MobileCore.log(LoggingMode.WARNING, "AEP SDK", "Received Network Response");
+                        Iterator<EdgeEventHandle> eventIterator = handles.iterator();
+                        while (eventIterator.hasNext()) {
+                            for (Map<String, Object> map : eventIterator.next().getPayload()) {
+                                for (Map.Entry<String, Object> entry : map.entrySet()) {
+                                    String key = entry.getKey();
+                                    Object value = entry.getValue();
+                                    MobileCore.log(LoggingMode.WARNING, "AEP SDK", key);
+                                    MobileCore.log(LoggingMode.WARNING, "AEP SDK", value.toString());
+
+                                }
+                            }
+                        }
                 }
                 });
                 callbackContext.success();
