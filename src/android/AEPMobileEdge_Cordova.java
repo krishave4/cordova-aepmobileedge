@@ -117,7 +117,7 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
                 //         .setXdmSchema(xdmData)
                 //         .build();
                 // Edge.sendEvent(experienceEvent, null);
-                ExperienceEvent experienceEvent = new ExperienceEvent.Builder().setXdmSchema(getMapFromEvent(event)).build();
+                ExperienceEvent experienceEvent = new ExperienceEvent.Builder().setXdmSchema(xdmData).build();
                 MobileCore.log(LoggingMode.WARNING, "AEP SDK", "Sending the Message");
                 Edge.sendEvent(experienceEvent, new EdgeCallback() {
                 @Override
