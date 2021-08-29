@@ -78,21 +78,40 @@ public class AEPMobileEdge_Cordova extends CordovaPlugin {
                 //   xdmData.put("eventType", "MyFirstXDMExperienceEvent");
                 //   xdmData.put("_aepgdcdevenablement2", reviewXdmData);
 
-                  ExperienceEvent experienceEvent = new ExperienceEvent.Builder().setXdmSchema(getMapFromEvent(event)).build();
-                  MobileCore.log(LoggingMode.WARNING, "AEP SDK", "Sending the Message");
-                  Edge.sendEvent(experienceEvent, new EdgeCallback() {
-                    @Override
-                    public void onComplete(final List<EdgeEventHandle> handles) {
-                          // handle the Edge Network response 
-                          MobileCore.log(LoggingMode.WARNING, "AEP SDK", "Received Network Response");
-                    }
-                  });
-                  callbackContext.success();
-              } catch (Exception ex) {
-                  final String errorMessage = String.format("Exception in call to dispatchEvent: %s", ex.getLocalizedMessage());
-                  MobileCore.log(LoggingMode.WARNING, "AEP SDK", errorMessage);
-                  callbackContext.error(errorMessage);
-              }
+            //       ExperienceEvent experienceEvent = new ExperienceEvent.Builder().setXdmSchema(getMapFromEvent(event)).build();
+            //       MobileCore.log(LoggingMode.WARNING, "AEP SDK", "Sending the Message");
+            //       Edge.sendEvent(experienceEvent, new EdgeCallback() {
+            //         @Override
+            //         public void onComplete(final List<EdgeEventHandle> handles) {
+            //              MobileCore.log(LoggingMode.WARNING, "AEP SDK", "Received Network Response");
+            //         }
+            //       });
+            //       callbackContext.success();
+            //   } catch (Exception ex) {
+            //       final String errorMessage = String.format("Exception in call to dispatchEvent: %s", ex.getLocalizedMessage());
+            //       MobileCore.log(LoggingMode.WARNING, "AEP SDK", errorMessage);
+            //       callbackContext.error(errorMessage);
+            //   }                       // handle the Edge Network response 
+
+            String jsonString = "{" +
+            "'eventType':'Mobile SDK Page View'," +
+            "'web':{" +
+            "'webPageDetails':{" +
+            "'pageViews':{" +
+            "'id':'" + "/uri456789" +
+            "}" +
+            "}" +
+            "}" +
+            "}";
+    Map<String, Object> xdmData = new Gson().fromJson(
+            jsonString, new TypeToken<HashMap<String, Object>>() {}.getType()
+    );
+
+    ExperienceEvent experienceEvent = new ExperienceEvent.Builder()
+            .setXdmSchema(xdmData)
+            .build();
+    Edge.sendEvent(experienceEvent, null);
+    
           }
       });
   }
